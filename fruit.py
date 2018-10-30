@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 import random
 
+
 class Fruit(Sprite):
 
     def __init__(self, screen):

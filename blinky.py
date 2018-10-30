@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 import spritesheet
 
+
 class Blinky(Sprite):
 
     def __init__(self, screen, pacman, scoreboard):
@@ -15,7 +16,7 @@ class Blinky(Sprite):
         self.move_speed = 1
         self.scoreboard = scoreboard
 
-        ss = spritesheet.spritesheet('images/sheet.png')
+        ss = spritesheet.SpriteSheet('images/sheet.png')
         self.rimages = []
         self.rimages = ss.images_at(((457, 65, 13, 14), (473, 65, 13, 14)), colorkey=(0, 0, 0))
         self.limages = []
@@ -27,7 +28,8 @@ class Blinky(Sprite):
         self.bimages = []
         self.bimages = ss.images_at(((585, 65, 13, 14), (601, 65, 13, 14)), colorkey=(0, 0, 0))
         self.bwimages = []
-        self.bwimages = ss.images_at(((585, 65, 13, 14), (633, 65, 13, 14), (601, 65, 13, 14), (617, 65, 13, 14)), colorkey=(0, 0, 0))
+        self.bwimages = ss.images_at(((585, 65, 13, 14), (633, 65, 13, 14), (601, 65, 13, 14), (617, 65, 13, 14)),
+                                     colorkey=(0, 0, 0))
         self.erimage = ss.image_at((583, 81, 13, 14), colorkey=(0, 0, 0))
         self.elimage = ss.image_at((595, 81, 13, 14), colorkey=(0, 0, 0))
         self.euimage = ss.image_at((608, 81, 13, 14), colorkey=(0, 0, 0))
@@ -45,7 +47,6 @@ class Blinky(Sprite):
         self.pghost = (self.rect.centerx, self.rect.centery)
         self.font = pygame.font.Font(None, 28)
         self.ptext = self.font.render(str(self.pacman.ghost_score * 200), 1, (255, 255, 255))
-
 
         self.direction = "right"
         self.next_move = "none"
@@ -121,7 +122,7 @@ class Blinky(Sprite):
                 self.centery += 1
             self.rect.centerx = self.centerx
             self.rect.centery = self.centery
-            if self.rect.centery < 33 * 13 and self.rect.centery > 25 * 13 and self.rect.centerx > 21 * 13 and self.rect.centerx < 35 * 13:
+            if 25 * 13 < self.rect.centery < 33 * 13 and 21 * 13 < self.rect.centerx < 35 * 13:
                 self.reset()
         else:
             self.reset()

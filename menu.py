@@ -1,6 +1,7 @@
 import pygame.font
 import spritesheet
 
+
 class Menu:
 
     def __init__(self):
@@ -8,7 +9,7 @@ class Menu:
         self.show_scores = False
         self.fontb = pygame.font.Font(None, 72)
         self.font = pygame.font.Font(None, 46)
-        self.ss = spritesheet.spritesheet('images/sheet.png')
+        self.ss = spritesheet.SpriteSheet('images/sheet.png')
 
     def main(self, play_button, score_button, screen):
         play_button.draw_button()
@@ -24,7 +25,6 @@ class Menu:
         recti.y = screen.get_height() / 8
         recti.x = screen.get_width() / 2 - 108
         screen.blit(image, recti)
-
 
     def scores(self, score_button, screen):
         score_button.draw_button()

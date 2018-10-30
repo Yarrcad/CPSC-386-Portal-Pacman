@@ -51,7 +51,8 @@ class Maze:
                     self.powerpills.add(powerpill)
                 elif col == 'Q':
                     qpill = ImageRect(self.screen, self.powerpill, int(2 * sz), int(2 * sz))
-                    qpill.rect = pygame.Rect(ncol * sz - qpill.rect.width/4, nrow * sz - qpill.rect.height/4, qpill.rect.width, qpill.rect.height)
+                    qpill.rect = pygame.Rect(ncol * sz - qpill.rect.width/4, nrow * sz - qpill.rect.height/4,
+                                             qpill.rect.width, qpill.rect.height)
                     self.qpills.add(qpill)
 
     def blitme(self, screen):

@@ -21,7 +21,7 @@ class Clyde(Sprite):
         self.active = True
         self.scoreboard = scoreboard
 
-        ss = spritesheet.spritesheet('images/sheet.png')
+        ss = spritesheet.SpriteSheet('images/sheet.png')
         self.rimages = []
         self.rimages = ss.images_at(((457, 97, 13, 14), (473, 97, 13, 14)), colorkey=(0, 0, 0))
         self.limages = []
@@ -33,7 +33,8 @@ class Clyde(Sprite):
         self.bimages = []
         self.bimages = ss.images_at(((585, 65, 13, 14), (601, 65, 13, 14)), colorkey=(0, 0, 0))
         self.bwimages = []
-        self.bwimages = ss.images_at(((585, 65, 13, 14), (633, 65, 13, 14), (601, 65, 13, 14), (617, 65, 13, 14)), colorkey=(0, 0, 0))
+        self.bwimages = ss.images_at(((585, 65, 13, 14), (633, 65, 13, 14), (601, 65, 13, 14), (617, 65, 13, 14)),
+                                     colorkey=(0, 0, 0))
 
         self.image = pygame.transform.scale(self.uimages[0], (13 * 3, 13 * 3))
         self.rect = self.image.get_rect()
@@ -41,7 +42,6 @@ class Clyde(Sprite):
         self.image_speed = 30
         self.wait = 180
         self.move_speed = 1
-
 
         self.rect.centery = 28.5 * 13
         self.rect.centerx = 27.5 * 13
@@ -133,12 +133,11 @@ class Clyde(Sprite):
                 self.centery += 1
             self.rect.centerx = self.centerx
             self.rect.centery = self.centery
-            if self.rect.centery < 33 * 13 and self.rect.centery > 25 * 13 and self.rect.centerx > 21 * 13 and self.rect.centerx < 35 * 13:
+            if 25 * 13 < self.rect.centery < 33 * 13 and 21 * 13 < self.rect.centerx < 35 * 13:
                 self.reset()
                 self.wait = 0
         else:
             self.reset()
-
 
     def blitme(self):
         if self.active:
@@ -149,7 +148,7 @@ class Clyde(Sprite):
         self.centerx = self.rect.centerx = 27.5 * 13
         self.wait = 180
         self.chase = False
-        if (random.randint(0,1) == 0):
+        if random.randint(0, 1) == 0:
             self.direction = "left"
         else:
             self.direction = "right"

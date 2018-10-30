@@ -2,7 +2,6 @@ import pygame
 import sys
 
 
-
 def check_keydown_events(event, pacman):
     if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
         pacman.next_move = "right"
@@ -13,10 +12,12 @@ def check_keydown_events(event, pacman):
     elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
         pacman.next_move = "down"
 
+
 def check_mouse_clicks(event, bportal, oportal, menu, game, score_button, play_button, pacman, screen, maze, audio):
     if score_button.rect.collidepoint(pygame.mouse.get_pos()):
         menu.show_scores = not menu.show_scores
-    elif event.type == pygame.MOUSEBUTTONDOWN and play_button.rect.collidepoint(pygame.mouse.get_pos()) and not game.active:
+    elif event.type == pygame.MOUSEBUTTONDOWN and play_button.rect.collidepoint(pygame.mouse.get_pos()) and\
+            not game.active:
         game.active = True
         maze.build()
         audio.a.play(audio.begin)
@@ -27,15 +28,21 @@ def check_mouse_clicks(event, bportal, oportal, menu, game, score_button, play_b
         oportal.active = True
         oportal.location()
 
+
 def check_space(pacman, screen):
     if pacman.direction == 'right' and int(pacman.centerx) + 13 * 4 < screen.get_rect().right:
-        return (0, 0, 0) == screen.get_at((int(pacman.centerx) + 13 * 4 - 1, int(pacman.centery))) or (255, 255, 255) == screen.get_at((int(pacman.centerx) + 13 * 4 - 1, int(pacman.centery)))
+        return (0, 0, 0) == screen.get_at((int(pacman.centerx) + 13 * 4 - 1, int(pacman.centery))) or (255, 255, 255)\
+               == screen.get_at((int(pacman.centerx) + 13 * 4 - 1, int(pacman.centery)))
     if pacman.direction == 'left' and int(pacman.centerx) + 13 * 4 > screen.get_rect().left:
-        return (0, 0, 0) == screen.get_at((int(pacman.centerx) - 13 * 4 - 1, int(pacman.centery))) or (255, 255, 255) == screen.get_at((int(pacman.centerx) - 13 * 4 - 1, int(pacman.centery)))
+        return (0, 0, 0) == screen.get_at((int(pacman.centerx) - 13 * 4 - 1, int(pacman.centery))) or (255, 255, 255)\
+               == screen.get_at((int(pacman.centerx) - 13 * 4 - 1, int(pacman.centery)))
     if pacman.direction == 'up' and int(pacman.centery) + 13 * 4 > screen.get_rect().top:
-        return (0, 0, 0) == screen.get_at((int(pacman.centerx), int(pacman.centery) - 13 * 4 - 1)) or (255, 255, 255) == screen.get_at((int(pacman.centerx), int(pacman.centery) - 13 * 4 - 1))
+        return (0, 0, 0) == screen.get_at((int(pacman.centerx), int(pacman.centery) - 13 * 4 - 1)) or (255, 255, 255)\
+               == screen.get_at((int(pacman.centerx), int(pacman.centery) - 13 * 4 - 1))
     if pacman.direction == 'down' and int(pacman.centery) + 13 * 4 < screen.get_rect().bottom:
-        return (0, 0, 0) == screen.get_at((int(pacman.centerx), int(pacman.centery) + 13 * 4 - 1)) or (255, 255, 255) == screen.get_at((int(pacman.centerx), int(pacman.centery) + 13 * 4 - 1))
+        return (0, 0, 0) == screen.get_at((int(pacman.centerx), int(pacman.centery) + 13 * 4 - 1)) or (255, 255, 255)\
+               == screen.get_at((int(pacman.centerx), int(pacman.centery) + 13 * 4 - 1))
+
 
 def check_events(pacman, score_button, menu, play_button, game, bportal, oportal, screen, maze, audio):
     for event in pygame.event.get():
@@ -44,7 +51,8 @@ def check_events(pacman, score_button, menu, play_button, game, bportal, oportal
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, pacman)
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            check_mouse_clicks(event, bportal, oportal, menu, game, score_button, play_button, pacman , screen, maze, audio)
+            check_mouse_clicks(event, bportal, oportal, menu, game, score_button, play_button, pacman,
+                               screen, maze, audio)
         if score_button.rect.collidepoint(pygame.mouse.get_pos()):
             score_button.active = True
         else:
@@ -105,7 +113,8 @@ def check_collisions(pacman, bricks, shields, powerpills, scoreboard, blinky, pi
             ghost_ai1(clyde, bricks, shields, audio)
         else:
             ghost_ai4(clyde, bricks)
-        
+
+
 def change_direction(ghost):
     if ghost.direction == "right":
         ghost.direction = "left"
@@ -115,7 +124,6 @@ def change_direction(ghost):
         ghost.direction = "down"
     elif ghost.direction == "down":
         ghost.direction = "up"
-
 
 
 def pac_collide(pacman, bricks, shields):
@@ -173,6 +181,7 @@ def pac_collide(pacman, bricks, shields):
             pacman.move = False
         pacman.rect.centery -= 1
 
+
 def ghost_ai1(ghost, bricks, shields, audio):
     if pygame.sprite.collide_rect(ghost, ghost.pacman) and ghost.pacman.alive:
         audio.a.play(audio.death)
@@ -183,14 +192,16 @@ def ghost_ai1(ghost, bricks, shields, audio):
             ghost.rect.centerx += ghost.move_speed
             if ghost.centery < ghost.pacman.centery:
                 ghost.rect.centery += ghost.move_speed
-                if not pygame.sprite.spritecollideany(ghost, bricks) and not pygame.sprite.spritecollideany(ghost, shields):
+                if not pygame.sprite.spritecollideany(ghost, bricks) and not pygame.sprite.spritecollideany(ghost,
+                                                                                                            shields):
                     ghost.direction = "down"
                 else:
                     ghost.direction = "up"
                 ghost.rect.centery -= ghost.move_speed
             else:
                 ghost.rect.centery -= ghost.move_speed
-                if not pygame.sprite.spritecollideany(ghost, bricks) and not pygame.sprite.spritecollideany(ghost, shields):
+                if not pygame.sprite.spritecollideany(ghost, bricks) and not pygame.sprite.spritecollideany(ghost,
+                                                                                                            shields):
                     ghost.direction = "up"
                 else:
                     ghost.direction = "down"
@@ -302,7 +313,6 @@ def ghost_ai2(ghost, bricks, shields, audio):
             ghost.direction = "down"
         ghost.rect.centery -= ghost.move_speed
 
-        
     if ghost.direction == "left":
         ghost.rect.centerx -= ghost.move_speed
         if pygame.sprite.spritecollideany(ghost, bricks) or pygame.sprite.spritecollideany(ghost, shields):
@@ -524,6 +534,7 @@ def ghost_ai3(ghost, bricks, shields, scoreboard, audio):
         else:
             ghost.rect.centery -= ghost.move_speed
 
+
 def ghost_ai4(ghost, bricks):
     if (ghost.direction == "left" or ghost.direction == "right") and 28.5 * 13 < ghost.centery:
         ghost.next_move = "up"
@@ -638,4 +649,3 @@ def ghost_ai4(ghost, bricks):
                 ghost.rect.centerx += ghost.move_speed
         else:
             ghost.rect.centery -= ghost.move_speed
-

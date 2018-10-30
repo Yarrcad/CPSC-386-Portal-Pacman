@@ -14,6 +14,7 @@ from clyde import Clyde
 from fruit import Fruit
 from audio import Audio
 
+
 class Game:
     BLACK = (0, 0, 0)
 
@@ -51,10 +52,13 @@ class Game:
     def play(self):
         while True:
             pygame.time.Clock().tick(1800)
-            func.check_events(self.pacman, self.score_button, self.menu, self.play_button, self, self.bportal, self.oportal, self.screen, self.maze, self.audio)
+            func.check_events(self.pacman, self.score_button, self.menu, self.play_button, self, self.bportal,
+                              self.oportal, self.screen, self.maze, self.audio)
             self.update_screen()
             if self.active:
-                func.check_collisions(self.pacman, self.bricks, self.shields, self.powerpills, self.scoreboard, self.blinky, self.pinky, self.inky, self.clyde, self.qpills, self.fruit, self.audio)
+                func.check_collisions(self.pacman, self.bricks, self.shields, self.powerpills,
+                                      self.scoreboard, self.blinky, self.pinky, self.inky, self.clyde,
+                                      self.qpills, self.fruit, self.audio)
                 self.pacman.update(self.oportal, self.bportal, self.audio)
                 if not self.pause:
                     self.fruit.update()

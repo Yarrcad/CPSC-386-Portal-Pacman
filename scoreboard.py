@@ -27,6 +27,11 @@ class Scorebord:
         self.c3lives_rect = (self.screen_rect.right * 12.5 / 20, self.screen_rect.bottom - 50)
         self.tlevel_rect = (self.screen_rect.right * 15 / 20, self.screen_rect.bottom - 50)
         self.clevel_rect = (self.screen_rect.right * 18 / 20, self.screen_rect.bottom - 50)
+        self.tscore = self.font.render("Score: ", True, self.WHITE, self.BLACK)
+        self.cscore = self.font.render(str(self.score), True, self.YELLOW, self.BLACK)
+        self.tlives = self.font.render("Lives: ", True, self.WHITE, self.BLACK)
+        self.tlevel = self.font.render("Level: ", True, self.WHITE, self.BLACK)
+        self.clevel = self.font.render(str(self.level), True, self.YELLOW, self.BLACK)
 
     def update_score(self, game):
         if self.eaten == 240:
